@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <!-- Coder Factory Day 1, Challenge 2 Sample Code -->
+  <head>
+    <title>Day 1, Challenge 2</title>
+    <style>
+      body { font-family: 'Helvetica Neue', Helvetica, Arial; font-weight: 200; }
+      input { width: 120px; padding: 5px 0; background: whitesmoke; border: 1px solid #555; border-radius: 5px; cursor: pointer; }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h1>Day 1, Challenge 2</h1>
+      <p>Move a HTML element on the screen, using a JavaScript event</p>
+      <p>For example, when a button is clicked, it moves 200 pixels to the right</p>
+    </div>
+
+    <div id="container">
+      <!-- Create a HTML Button for Single Clicking Events -->
+      <p><input id="btnClick" type="button" value="Single click me"></p>
+      <!-- Create a HTML Button for Double Clicking Events -->
+      <p><input id="btnDblClick" type="button" value="Double click me"></p>
+      <!-- Create a HTML Button for Mouse Over Events -->
+      <p><input id="btnHover" type="button" value="Hover over me"></p>
+    </div>
+
+    <script>
+      // Get each HTML Button by ID
+      var btnClick = document.getElementById('btnClick');
+      var btnDblClick = document.getElementById('btnDblClick');
+      var btnHover = document.getElementById('btnHover');
+
+      // Created a common fuction for moving the element
+      var moveElement = function(el){
+        // IF the element has no Margin Left
+        if( el.style.marginLeft === '' ) {
+          // SET the margin left of the element
+          el.style.marginLeft = '200px';
+        }
+        // OTHERWISE add 200px to the existing left margin 
+        else {
+          el.style.marginLeft = parseInt(el.style.marginLeft) + 200 + 'px';
+          el.style['margin-left'] = parseInt(el.style.marginLeft) + 200 + 'px';
+        }
+      };
+
+      // Attach the 'click' event to a Button
+      btnClick.addEventListener('click', function() { 
+        // Log to console
+        console.log('Single Click!');
+        // 'this' refers to the current context, 
+        // which in this case is the btnClick button
+        moveElement(this);
+      });
+
+      // Attach the 'double click' event to a Button
+      btnDblClick.addEventListener('dblclick', function() { 
+        // Log to console
+        console.log('Double Click!');
+        // 'this' refers to the current context, 
+        // which in this case is the btnDblClick button
+        moveElement(this);
+      });
+
+      // Attach the 'hover' event to a Button
+      btnHover.addEventListener('mouseover', function() { 
+        // Log to console
+        console.log('Mouse Over!');
+        // 'this' refers to the current context, 
+        // which in this case is the btnHover button
+        moveElement(this);
+      });
+    </script>
+  </body>
+
+</html>

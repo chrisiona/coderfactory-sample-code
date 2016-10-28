@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Day 3 Challenge</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+
+        <select id="listOfCountries"></select>
+        <select id="listOfStates"></select>
+
+        <script>
+            var countries = [], states = {};
+
+            $.getJSON("countries.json",
+                function(data) {
+                    console.log("AJAX Data:", data);
+                    countries = data.countries;
+                    states = data.states;
+
+                    // For each country in data.countries
+                    for( var country in data.countries ) {
+                        // Append it to the Select box
+                        $("#listOfCountries").append(
+                            // Create an <OPTION> element and populate it with the country 
+                            $("<option>", {
+                                value: data.countries[country],
+                                text: data.countries[country]
+                            })
+                        )                    
+                    }
+
+                    populateStateList(data.countries[0]);
+                }
+            );
+
+            function populateStateList( country ){
+                    // Remove any existing states
+                    $("#listOfStates").find('option').remove()
+
+                    if( states.hasOwnProperty(country) ) {
+                        // For each country in data.countries
+                        for( var state in states[country] ) {
+                            // Append it to the Select box
+                            $("#listOfStates").append(
+                                // Create an <OPTION> element and populate it with the country 
+                                $("<option>", {
+                                    value: states[country][state],
+                                    text: states[country][state],
+                                })
+                            )                    
+                        }
+                    }
+            }
+
+            $("#listOfCountries")
+                .change(function(obj){ 
+                    console.log("Country Changed to:", obj.currentTarget.value);
+                    populateStateList(obj.currentTarget.value);
+                });
+
+        </script>
+    </body>
+</html>
